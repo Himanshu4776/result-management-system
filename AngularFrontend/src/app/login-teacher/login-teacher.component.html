@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row w-100 d-flex justify-content-center align-items-center main-div">
+    <div class="col-12 col-md-8 col-lg-6 col-xxl-5">
+      <div class="card py-3 px-2">
+        <div class="division">
+          <div class="row">
+            <div class="col-6 mx-auto mb-4 text-center">
+              <span class="main-heading">Login Form</span>
+            </div>
+          </div>
+      
+          <form class="form" [formGroup]="loginTeacher" (ngSubmit)="login()">
+            <div *ngIf="alertError" class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>{{errorMsg}}</strong>
+              <button (click)="closeAlertError()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="mb-3">
+              <div class="form-group">
+    
+                <input type="text" class="form-control"  placeholder="UserName" formControlName='name'>
+                <div *ngIf="name.touched && name.invalid" class="error">
+                  <span *ngIf="name.errors.required">UserName is required</span>                 
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-group">
+                
+                <input type="password" class="form-control"  placeholder="Password" formControlName='password'>
+                <div *ngIf="password.touched && password.invalid" class="error">
+                  <span *ngIf="password.errors.required">Password is required</span>
+                </div>
+              </div>
+            </div>
+            <div class="my-3 d-grid gap-2">
+              <button [disabled]="loginTeacher.invalid" type="submit" class="btn btn-primary">
+                <small><i class="fa fa-user px-2"></i>Login</small>
+              </button>
+            </div>
+          </form>     
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,78 @@
+<div *ngIf="hasError" class="container">
+  <h1 class="text-center server-error">Server error</h1>
+  <h1 class="text-center server-error">{{errorMsg}}</h1>
+</div>
+ <div *ngIf="!hasError" class="container-fluid">
+  <div class="row w-100 d-flex justify-content-center align-items-center main-div">
+    <div class="col-12 col-md-8 col-lg-6 col-xxl-5">
+      <div class="card py-3 px-2">
+        <div class="division">
+          <div class="row">
+            <div class="col-6 mx-auto mb-4 text-center">
+              <span class="main-heading">{{panelTitle}}</span>
+            </div>
+          </div>
+      
+          <form class="form" [formGroup]="updateStudent" (ngSubmit)="updatingStudent()">
+            <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Student</strong> {{successStatus}} successfully.
+              <button (click)="closeAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div *ngIf="alertError" class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>{{errorMsg}}</strong>
+              <button (click)="closeAlertError()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="mb-3">
+              <div class="form-group">
+    
+                <input type="text" class="form-control" placeholder="RollNo" formControlName='rollNo'>
+                <div *ngIf="rollNo.touched && rollNo.invalid" class="error">
+                  <span *ngIf="rollNo.errors.required">RollNo is required</span>  
+                  <span *ngIf="rollNo.errors.pattern">Enter only number</span>               
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-group">
+    
+                <input type="text" class="form-control" placeholder="Name" formControlName='name'>
+                <div *ngIf="name.touched && name.invalid" class="error">
+                  <span *ngIf="name.errors.required">UserName is required</span>                 
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-group">             
+                <input type="date" class="form-control" placeholder="Date of Birth" formControlName='dob'>
+                <div *ngIf="dob.touched && dob.invalid" class="error">
+                  <span *ngIf="dob.errors.required">Date of Birth is required</span>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="form-group">
+    
+                <input type="text" class="form-control" placeholder="Score" formControlName='score'>
+                <div *ngIf="score.touched && score.invalid" class="error">
+                  <span *ngIf="score.errors.required">Score is required</span>
+                  <span *ngIf="score.errors.pattern">Enter only number</span>
+                  <span *ngIf="score.errors.min">Min value should be 0</span>
+                  <span *ngIf="score.errors.max">Max value should be 100</span>                
+                </div>
+              </div>
+            </div>
+            <!-- <div class="my-3 d-grid gap-2"> -->
+              <button [disabled]="updateStudent.invalid" type="submit" class=" btn btn-space btn-primary">
+                <small><i class="fa fa-user px-2"></i>{{panelSubmit}}</small>
+              </button>
+              <button type="button" (click)="resetForm()" class="btn  btn-space btn-danger">
+                <small><i class="fa fa-refresh px-2"></i> Reset</small>
+                </button>
+            <!-- </div> -->
+          </form>     
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
